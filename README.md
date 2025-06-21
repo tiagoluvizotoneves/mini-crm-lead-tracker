@@ -46,3 +46,12 @@ php artisan migrate
 
 # Inicie o servidor
 php artisan serve
+
+---
+
+## 🚫 Importante
+
+Este projeto é distribuído sob uma licença personalizada de **uso exclusivamente educacional e pessoal**.  
+**É proibido qualquer uso comercial, revenda, SaaS ou qualquer forma de monetização.**  
+
+Leia os detalhes no arquivo [LICENSE](./LICENSE).

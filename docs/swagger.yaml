@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: Mini CRM Lead Tracker API
+  version: 1.0.0
+  description: Documentação inicial da API do Mini CRM Lead Tracker
+
+paths:
+  /api/leads:
+    get:
+      summary: Lista todos os leads
+      responses:
+        '200':
+          description: Lista de leads
+    post:
+      summary: Cria um novo lead
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+                origin:
+                  type: string
+                notes:
+                  type: string
+                kanban_stage_id:
+                  type: integer
+      responses:
+        '201':
+          description: Lead criado com sucesso
+
+components:
+  schemas:
+    Lead:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        origin:
+          type: string
+        notes:
+          type: string
+        kanban_stage_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
