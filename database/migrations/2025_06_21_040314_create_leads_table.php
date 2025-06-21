@@ -7,25 +7,26 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Cria a tabela de usuários vinculados a uma empresa e role.
+     * Cria a tabela de leads (clientes potenciais).
      */
     public function up(): void {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('leads', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('role_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('kanban_stage_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('origin')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
 
     /**
-     * Remove a tabela de usuários.
+     * Remove a tabela de leads.
      */
     public function down(): void {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('leads');
     }
 };
