@@ -7,25 +7,20 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Cria a tabela de usuários vinculados a uma empresa e role.
+     * Cria a tabela de roles (perfis de usuários).
      */
     public function up(): void {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('role_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('name')->unique(); // admin, operador, master
             $table->timestamps();
         });
     }
 
     /**
-     * Remove a tabela de usuários.
+     * Remove a tabela de roles.
      */
     public function down(): void {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
     }
 };
