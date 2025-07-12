@@ -9,10 +9,12 @@ return new class extends Migration
     /**
      * Cria a tabela de roles (perfis de usuários).
      */
-    public function up(): void {
+    public function up(): void
+    {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique(); // admin, operador, master
+            $table->string('slug')->unique(); //
             $table->timestamps();
         });
     }
@@ -20,7 +22,8 @@ return new class extends Migration
     /**
      * Remove a tabela de roles.
      */
-    public function down(): void {
+    public function down(): void
+    {
         Schema::dropIfExists('roles');
     }
 };

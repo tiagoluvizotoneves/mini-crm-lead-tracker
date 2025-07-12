@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'company.valid' => \App\Http\Middleware\EnsureCompanyIsValid::class,
+            'role' => \App\Http\Middleware\CheckRoleBySlug::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
