@@ -1,15 +1,22 @@
 <?php
 
-use App\Http\Controllers\Api\V1\ActivityLogController;
-use App\Http\Controllers\Api\V1\KanbanStageController;
-use App\Http\Controllers\Api\V1\LeadController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\LeadController;
+use App\Http\Controllers\Api\V1\KanbanStageController;
+use App\Http\Controllers\Api\V1\ActivityLogController;
 
-Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
-    // outras rotas
-    Route::put('leads/{id}/move', [LeadController::class, 'move']);
+Route::prefix('v1')->group(function () {
 
-    Route::get('leads/{id}/logs', [ActivityLogController::class, 'index']);
+    // Login público
+    Route::post('/login', [AuthController::class, 'login']);
 
-    Route::apiResource('kanban-stages', KanbanStageController::class)->except(['show']);
+    // Rotas protegidas com Sanctum + multitenancy
+    Route::middleware(['auth:sanctum', 'company.valid'])->group(function () {
+        Route::get('/usuario-logado', fn() => response()->json(auth()->user()));
+
+        Route::put('leads/{id}/move', [LeadController::class, 'move']);
+        Route::get('leads/{id}/logs', [ActivityLogController::class, 'index']);
+        Route::apiResource('kanban-stages', KanbanStageController::class)->except(['show']);
+    });
 });
