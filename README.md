@@ -52,7 +52,7 @@ cp .env.example .env
 php artisan key:generate
 
 # Rode as migrations
-php artisan migrate
+php artisan migrate:fresh --seed
 
 # Inicie o servidor
 php artisan serve
